@@ -1,6 +1,7 @@
 import socket
 
 
+
 class ClientServer():
 
     def __init__(self,SERVER_HOST,SERVER_PORT):
@@ -25,7 +26,7 @@ class ClientServer():
         else:
             print('no such file exists')
 
-client = ClientServer("127.0.0.6", 7856)
+client = ClientServer("192.168.100.21", 7856)
 
 name_file = 'highway_to_hell.txt'
 
