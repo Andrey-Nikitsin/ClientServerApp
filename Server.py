@@ -9,7 +9,7 @@ class LocalServer:
 
     def serv_sock(self):
         serv_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        serv_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        serv_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)# SO_REUSEADDR - сбрасывает тайм аут
         serv_socket.bind((self.SRV_HOST, self.SRV_PORT))
         serv_socket.listen(8)
         return serv_socket
@@ -17,6 +17,7 @@ class LocalServer:
     def get_file(self, name_file):
         files = os.listdir()
         if name_file in files:
+            print(name_file)
             return True
         else:
             return False
@@ -26,8 +27,9 @@ class LocalServer:
             connect, adress = self.serv_sock().accept()
             data = connect.recv(2048)
             name_file = data.decode('utf-8')
+            print(name_file)
             if self.get_file(name_file) == True:
-                connect.send('1'.encode('utf-8'))#отправляем ответ что файл есть
+                connect.send('1'.encode('utf-8'))
                 with open(f'./{name_file}', 'r') as file:
                     response = file.read()
                 connect.send(response.encode('utf-8'))
