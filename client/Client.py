@@ -1,10 +1,12 @@
 import socket
-from dataclasses import dataclass
+from dataclasses import dataclass, make_dataclass
+from collections import namedtuple
 
-@dataclass()
-class ClientServer():
-    SRV_PORT: int
-    SRV_HOST: str
+
+DataServer = make_dataclass('DataServer',('SRV_HOST','SRV_PORT'))
+
+@dataclass
+class ClientServer(DataServer):
 
     def client_sock(self, name_file):
         set_file = ''
@@ -24,10 +26,11 @@ class ClientServer():
         else:
             print('no such file exists')
 
-client = ClientServer(7856, "192.168.100.21")
-
-
 name_file = 'highway_to_hell.txt'
 
+client = ClientServer("192.168.100.21", 7856)
+
+
 if __name__ == '__main__':
+
     client.client_sock(name_file)
