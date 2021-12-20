@@ -1,12 +1,10 @@
 import socket
+from dataclasses import dataclass
 
-
-
+@dataclass()
 class ClientServer():
-
-    def __init__(self,SERVER_HOST,SERVER_PORT):
-        self.SRV_HOST = SERVER_HOST
-        self.SRV_PORT = SERVER_PORT
+    SRV_PORT: int
+    SRV_HOST: str
 
     def client_sock(self, name_file):
         set_file = ''
@@ -26,7 +24,8 @@ class ClientServer():
         else:
             print('no such file exists')
 
-client = ClientServer("192.168.100.21", 7856)
+client = ClientServer(7856, "192.168.100.21")
+
 
 name_file = 'highway_to_hell.txt'
 

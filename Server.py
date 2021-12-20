@@ -1,11 +1,11 @@
 import socket
 import os
+from dataclasses import dataclass
 
+@dataclass()
 class LocalServer:
-
-    def __init__(self,SERVER_HOST,SERVER_PORT):
-        self.SRV_HOST = SERVER_HOST
-        self.SRV_PORT = SERVER_PORT
+    SRV_HOST: str
+    SRV_PORT: int
 
     def serv_sock(self):
         serv_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -40,7 +40,7 @@ class LocalServer:
             connect.close()
 
 
-server = LocalServer("192.168.100.21",7856)
+server = LocalServer("192.168.100.21", 7856)
 
 if __name__ == '__main__':
     server.run_server()
